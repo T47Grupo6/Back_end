@@ -17,13 +17,13 @@ public class Categoria {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "O atributo nome_categoria é Obrigatório e não pode utilizar espaços em branco!") 
-	@Size(min = 3, max = 100, message = "O atributo nome_categoria deve conter no mínimo 05 e no máximo 100 caracteres")
-	private String nome_categoria; 
+	@NotBlank(message = "O atributo nomeCategoria é Obrigatório e não pode utilizar espaços em branco!") 
+	@Size(min = 3, max = 100, message = "O atributo nomeCategoria deve conter no mínimo 05 e no máximo 100 caracteres")
+	private String nomeCategoria; 
 	
 	@NotNull(message = "O atributo descricao é Obrigatório!")
 	@Size(min = 10, max = 1000, message = "O atributo descricao deve conter no mínimo 10 e no máximo 500 caracteres")
-	private String descricao;
+	private String descricaoCategoria;
 
 	public Long getId() {
 		return id;
@@ -33,20 +33,20 @@ public class Categoria {
 		this.id = id;
 	}
 
-	public String getNome_categoria() {
-		return nome_categoria;
+	public String getNomeCategoria() {
+		return nomeCategoria;
 	}
 
-	public void setNome_categoria(String nome_categoria) {
-		this.nome_categoria = nome_categoria;
+	public void setNomeCategoria(String nomeCategoria) {
+		this.nomeCategoria = nomeCategoria;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getDescricaoCategoria() {
+		return descricaoCategoria;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescricaoCategoria(String descricaoCategoria) {
+		this.descricaoCategoria = descricaoCategoria;
 	}
 	
 }
