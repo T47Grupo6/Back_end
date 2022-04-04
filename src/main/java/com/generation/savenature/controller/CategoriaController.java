@@ -21,9 +21,6 @@ import com.generation.savenature.model.Categoria;
 import com.generation.savenature.repository.CategoriaRepository;
 
 
-
-
-
 @RestController
 @RequestMapping("/categoria") 
 @CrossOrigin(origins = "*", allowedHeaders = "*") 
