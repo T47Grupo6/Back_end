@@ -1,9 +1,5 @@
 package com.generation.savenature.repository;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3cc748a942d718bb64a11d0af43d14213e5ffbe8
 import java.math.BigDecimal;
 import java.util.List;
 
