@@ -29,7 +29,7 @@ public class Usuario {
 
 	@NotNull(message = "O campo Senha é Obrigatório!")
 	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
-	private Long senha;
+	private String senha;
 	
 	private String foto;
 
@@ -57,11 +57,11 @@ public class Usuario {
 		this.usuario = usuario;
 	}
 
-	public Long getSenha() {
+	public String getSenha() {
 		return senha;
 	}
 
-	public void setSenha(Long senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
