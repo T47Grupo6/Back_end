@@ -26,7 +26,7 @@ public class SwaggerConfig {
 					.name("Generation Brasil")
 					.url("https://brazil.generation.org/"))
 				.contact(new Contact()
-					.name("Conteudo SaveNature")
+					.name("SaveNature")
 					.url("https://github.com/T47Grupo6")
 					.email("springecommerce12@gmail.com")))
 				.externalDocs(new ExternalDocumentation()
