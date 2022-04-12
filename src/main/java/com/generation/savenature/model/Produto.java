@@ -47,7 +47,6 @@ public class Produto {
 	 * conseguiremos visualizar a parte decimal do preço mesmo sendo 00.
 	 */
 	
-	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Categoria categoria;

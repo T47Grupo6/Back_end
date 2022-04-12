@@ -1,6 +1,8 @@
 package com.generation.savenature.service;
 
 import java.nio.charset.Charset;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Optional;
 
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -24,6 +26,10 @@ public class UsuarioService {
 
 		if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
 			return Optional.empty();
+		
+		if (calcularIdade(usuario.getDataNascimento()) < 18)
+			throw new ResponseStatusException(
+					HttpStatus.BAD_REQUEST, "Usuário é menor de 18 anos", null);
 		
 		if (usuario.getFoto().isBlank())
 				usuario.setFoto("https://i.imgur.com/Zz4rzVR.png");
@@ -79,8 +85,12 @@ public class UsuarioService {
 		return Optional.empty();
 	
 	}
-		
+	
+	private int calcularIdade(LocalDate dataNascimento) {
 
+		return Period.between(dataNascimento, LocalDate.now()).getYears();
+	}
+		
 	private String criptografarSenha(String senha) {
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -104,6 +114,4 @@ public class UsuarioService {
 	
 	}
 	
-	
-
 }
