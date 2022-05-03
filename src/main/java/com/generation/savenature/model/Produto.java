@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "tb_produto")
 
 public class Produto {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -39,14 +39,13 @@ public class Produto {
 	private String descricaoProduto;
 
 	
-	private String fotoproduto;
+	private String fotoProduto;
 	
 	/**
 	 * A anotação @JsonFormat(shape = JsonFormat.Shape.STRING) é utilizada 
 	 * para formatar o valor do preço do produto como uma String. Desta forma,
 	 * conseguiremos visualizar a parte decimal do preço mesmo sendo 00.
 	 */
-	
 	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
@@ -92,12 +91,12 @@ public class Produto {
 		this.descricaoProduto = descricaoProduto;
 	}
 
-	public String getFotoproduto() {
-		return fotoproduto;
+	public String getFotoProduto() {
+		return fotoProduto;
 	}
 
-	public void setFotoproduto(String fotoproduto) {
-		this.fotoproduto = fotoproduto;
+	public void setFotoProduto(String fotoProduto) {
+		this.fotoProduto = fotoProduto;
 	}
 
 	public Categoria getCategoria() {
@@ -107,5 +106,5 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
+
 }

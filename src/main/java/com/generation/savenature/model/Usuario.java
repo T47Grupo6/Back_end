@@ -1,5 +1,9 @@
 package com.generation.savenature.model;
 
+
+import java.time.LocalDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +13,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+
 
 @Entity
 @Table(name = "tb_usuario")
@@ -23,15 +32,22 @@ public class Usuario {
 	@NotBlank(message = "O campo Nome é Obrigatório!")
 	private String nome;
 
+	@Schema(example = "email@email.com.br")
 	@NotBlank(message = "O camopo Usuário é Obrigatório!")
 	@Email(message = "Usuário deve ser um email válido!")
 	private String usuario;
 
 	@NotNull(message = "O campo Senha é Obrigatório!")
 	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
-	private Long senha;
+	private String senha;
 	
 	private String foto;
+
+	@Column(name = "data_nascimento")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "O atributo Data de Nascimento é Obrigatório!")
+	private LocalDate dataNascimento;
+
 
 	public Long getId() {
 		return id;
@@ -57,11 +73,11 @@ public class Usuario {
 		this.usuario = usuario;
 	}
 
-	public Long getSenha() {
+	public String getSenha() {
 		return senha;
 	}
 
-	public void setSenha(Long senha) {
+	public void setSenha(String senha) {
 		this.senha = senha;
 	}
 
@@ -72,6 +88,13 @@ public class Usuario {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
 
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+	
 }

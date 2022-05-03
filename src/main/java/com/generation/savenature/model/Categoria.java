@@ -30,11 +30,11 @@ public class Categoria {
 	@NotNull(message = "O atributo descricao é Obrigatório!")
 	@Size(min = 10, max = 1000, message = "O atributo descricao deve conter no mínimo 10 e no máximo 500 caracteres")
 	private String descricaoCategoria;
-
+	
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("categoria")
 	private List<Produto> produto;
-	
+
 	public Long getId() {
 		return id;
 	}

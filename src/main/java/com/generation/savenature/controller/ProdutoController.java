@@ -24,7 +24,7 @@ import com.generation.savenature.repository.ProdutoRepository;
 
 @RestController
 @RequestMapping("/produto")
-@CrossOrigin(origins = "", allowedHeaders = "")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProdutoController {
 
 	@Autowired
@@ -45,17 +45,19 @@ public class ProdutoController {
 			.orElse(ResponseEntity.notFound().build());
 	}
 	
-	@GetMapping("/nome/{nome}")
-	public ResponseEntity<List<Produto>> getByNome(@PathVariable String nomeProduto){
+	@GetMapping("/nomeProduto/{nomeProduto}")
+	public ResponseEntity<List<Produto>> getByNomeProduto(@PathVariable String nomeProduto){
 		return ResponseEntity.ok(produtoRepository.findAllByNomeProdutoContainingIgnoreCase(nomeProduto));
 	}
 	
 	@PostMapping 
-	public ResponseEntity<Produto> postProduto(@Valid @RequestBody Produto produto){
-		return ResponseEntity.status(HttpStatus.CREATED).body(produtoRepository.save(produto));
+	public ResponseEntity<Produto> postProduto(@Valid @RequestBody Produto produto){ 
+		if (categoriaRepository.existsById(produto.getCategoria().getId()))
+			return ResponseEntity.status(HttpStatus.CREATED).body(produtoRepository.save(produto));
+
+		return ResponseEntity.badRequest().build();
 	}
 	
-
 	@PutMapping
 	public ResponseEntity<Produto> putProduto(@Valid @RequestBody Produto produto) {
 					
@@ -85,16 +87,9 @@ public class ProdutoController {
 	
 	// Consulta por nome ou descricao
 	
-	@GetMapping("/nome/{nomeProduto}/{descricaoProduto}")
+	@GetMapping("/nome/{nomeProduto}/oudescricaoProduto/{descricaoProduto}")
 	public ResponseEntity<List<Produto>> getByNomeProdutoOrDescricaoProduto(@PathVariable String nomeProduto, @PathVariable String descricaoProduto){
 		return ResponseEntity.ok(produtoRepository.findByNomeProdutoOrDescricaoProduto(nomeProduto, descricaoProduto));
-	}
-	
-	// Consulta por nome ou descricao
-	
-	@GetMapping("/nome/{nomeProduto}/oudescricaoProduto/{descricaoProduto}")
-	public ResponseEntity<List<Produto>> getByNomeProdutoAndDescricaoProduto(@PathVariable String nomeProduto, @PathVariable String descricaoProduto){
-		return ResponseEntity.ok(produtoRepository.findByNomeProdutoAndDescricaoProduto(nomeProduto, descricaoProduto));
 	}
 	
 	// Consulta por preço entre dois valores (Between com Native Query)
@@ -103,5 +98,15 @@ public class ProdutoController {
 	public ResponseEntity<List<Produto>> getByPrecoEntreNatve(@PathVariable BigDecimal inicio, @PathVariable BigDecimal fim){
 		return ResponseEntity.ok(produtoRepository.buscarProdutosEntre(inicio, fim));
 	}
-
+	
+	@GetMapping("/preco_menor/{preco}")
+	public ResponseEntity<List<Produto>> getPrecoMenorQue(@PathVariable BigDecimal preco){ 
+		return ResponseEntity.ok(produtoRepository.findByPrecoLessThanOrderByPrecoDesc(preco));
+	}
+	
+	@GetMapping("/preco_maior/{preco}")
+	public ResponseEntity<List<Produto>> getPrecoMaiorQue(@PathVariable BigDecimal preco){ 
+		return ResponseEntity.ok(produtoRepository.findByPrecoGreaterThanOrderByPreco(preco));
+	}
+	
 }
